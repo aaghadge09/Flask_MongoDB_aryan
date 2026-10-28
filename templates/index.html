@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Submit Data</title>
+</head>
+<body>
+  <h1>Submit Data</h1>
+
+  {% if error %}
+    <p role="alert" style="color: red;">{{ error }}</p>
+  {% endif %}
+
+  <form method="post">
+    <label for="name">Name</label><br>
+    <input id="name" name="name" value="{{ name or '' }}" required><br><br>
+
+    <label for="message">Message</label><br>
+    <textarea id="message" name="message" required>{{ message or '' }}</textarea><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+  <p><a href="/api">View the JSON API</a></p>
+</body>
+</html>
