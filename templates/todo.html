@@ -44,5 +44,34 @@
 
     <button type="submit">Submit item</button>
   </form>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>To-Do List</title>
+</head>
+<body>
+  <h1>Add a To-Do Item</h1>
+  <form action="/submittodoitem" method="post">
+    <label for="itemName">Item Name</label>
+    <input id="itemName" name="itemName" type="text" required>
+
+    <label for="itemId">Item ID</label>
+    <input id="itemId" name="itemId" type="text" required>
+
+    <label for="itemUuid">Item UUID</label>
+    <input id="itemUuid" name="itemUuid" type="text" required>
+
+    <label for="itemHash">Item Hash</label>
+    <input id="itemHash" name="itemHash" type="text" required>
+
+    <label for="itemDescription">Item Description</label>
+    <textarea id="itemDescription" name="itemDescription" required></textarea>
+
+    <button type="submit">Submit item</button>
+  </form>
 </body>
+</html></body>
 </html>
+
