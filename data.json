@@ -1,5 +1,14 @@
 [
   {
+    "name": "Updated sample entry",
+    "message": "This updated data is served by the Flask API."
+  },
+  {
+    "name": "Second entry",
+    "message": "Added on the aryan_new branch."
+  }
+][
+  {
     "name": "Sample entry",
     "message": "This data is read from data.json."
   }
