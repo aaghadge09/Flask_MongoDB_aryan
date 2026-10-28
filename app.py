@@ -77,5 +77,40 @@ def success():
 def todo_page():
     return render_template("todo.html")
 
+@app.route("/submittodoitem", methods=["POST"])
+def submit_todo_item():
+    item_name = request.form.get("itemName", "").strip()
+    item_description = request.form.get("itemDescription", "").strip()
+
+    if not item_name or not item_description:
+        return render_template(
+            "todo.html",
+            error="Please provide both an item name and description."
+        ), 400
+
+    mongo_uri = os.environ.get("MONGODB_URI")
+    if not mongo_uri:
+        return render_template(
+            "todo.html",
+            error="MongoDB is not configured. Set MONGODB_URI and try again."
+        ), 500
+
+    try:
+        with MongoClient(mongo_uri, serverSelectionTimeoutMS=5000) as client:
+            client.admin.command("ping")
+            database_name = os.environ.get("MONGODB_DB", "assignment3")
+            client[database_name]["todo_items"].insert_one({
+                "itemName": item_name,
+                "itemDescription": item_description
+            })
+    except PyMongoError:
+        app.logger.exception("Could not save the To-Do item")
+        return render_template(
+            "todo.html",
+            error="Could not save the item. Check the MongoDB connection and try again."
+        ), 500
+
+    return redirect(url_for("success"))
+
 if __name__ == "__main__":
     app.run(debug=True)
